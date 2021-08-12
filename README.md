@@ -15,4 +15,4 @@ tar vczf functional.tar.gz
 ```
 Check the output in `CMPP_out`.
 
-## It also available via CoLab: 
+## It also available via CoLab: [ColabCMPP](https://colab.research.google.com/github/JinyuanSun/CMPP/blob/main/ColabCMPP.ipynb)
