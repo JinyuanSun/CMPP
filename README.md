@@ -1,6 +1,6 @@
 # CMPP
-**Annotate C(CAZy)M(MEROPS)P(PHI)P(P450) for fungi.**
-Dependency: ncbi-blastp, hmmscan, venn and [functional](wulab.cf/CMPP/funcational.tar.gz)
+**Annotate C(CAZy)M(MEROPS)P(PHI)P(P450) for fungi.**  
+Dependency: ncbi-blast (v2.9), hmmscan, venn and [functional](wulab.cf/CMPP/funcational.tar.gz)
 ## Install
 Clone repo to local and download functional database.  
 ```bash
