@@ -1,6 +1,7 @@
 # CMPP
 **Annotate C(CAZy)M(MEROPS)P(PHI)P(P450) for fungi.**  
-Dependency: ncbi-blast (v2.9), hmmscan, venn and [functional](http://wulab.cf/CMPP/funcational.tar.gz)
+Dependency: ncbi-blast (v2.9 or higher), hmmscan, venn and [functional](http://wulab.cf/CMPP/funcational.tar.gz)  
+blastp need to support v5 database, hmmscan is part of HMMER and install venn using pip.  
 ## Install
 Clone repo to local and download functional database.  
 ```bash
