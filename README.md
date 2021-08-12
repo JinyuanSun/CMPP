@@ -14,3 +14,5 @@ tar vczf functional.tar.gz
 ./run_CMPP_anno.sh -i $protein.fas -d functional
 ```
 Check the output in `CMPP_out`.
+
+## It also available via CoLab: 
