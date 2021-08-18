@@ -16,4 +16,5 @@ tar vczf functional.tar.gz
 ```
 Check the output in `CMPP_out`.
 
-## It also available via CoLab: [ColabCMPP](https://colab.research.google.com/github/JinyuanSun/CMPP/blob/main/ColabCMPP.ipynb)
+## It also available via [CoLab](https://colab.research.google.com/github/JinyuanSun/CMPP/blob/main/ColabCMPP.ipynb).  
+In this CoLab notebook, you can upload a custom fasta file conatining a proteome or directly download a proteome from NCBI.  
