@@ -50,7 +50,7 @@ def cazy_plot(cazy_dict, short_cazy_names = True, size = 0.3, dark = False):
   
     ax.set(aspect="equal", title='CAZy annotation')
     plt.show()
-    fig.savefig('CMPP_out/cazy_pie.png',dpi=300)
+    fig.savefig('CMPP_out/cazy_pie.png',dpi=300,bbox_inches = 'tight')
 
 def mk_cazy_dict(htbfile = './protein.faa.cazy.htb'):
     cazy_dict = {"GH":0,"GT":0,"PL":0,"CE":0,"AA":0,"CBM":0}
@@ -143,7 +143,7 @@ def merops_plot(merops_dict, short_merops_names = True, size = 0.3, dark = False
   
     ax.set(aspect="equal", title='merops annotation')
     plt.show()
-    fig.savefig('CMPP_out/merops_pie.png',dpi=300)
+    fig.savefig('CMPP_out/merops_pie.png',dpi=300,bbox_inches = 'tight')
 
 def read_merops_map(merops_path = "./merops.txt"):
     merops_map_dict = {}
@@ -279,7 +279,7 @@ def phi_plot(phi_dict, short_phi_names = True,  dark = False):
 
     #plt.set(aspect="equal", title='PHI annotation')
     plt.show()
-    fig.savefig('CMPP_out/phi_bar.png',dpi=300)
+    fig.savefig('CMPP_out/phi_bar.png',dpi=300,bbox_inches = 'tight')
 
 def make_phi_dict(btbfile = 'protein.faa.phi.btb'):
     phi_dict =  {"RC":0,
@@ -345,7 +345,7 @@ def venn_plot(dataset_dict):
 
     fig = venn(dataset_dict,cmap = plt.get_cmap("RdYlBu"))
     plt.show()
-    fig.figure.savefig('CMPP_out/venn.png',dpi=300)
+    fig.figure.savefig('CMPP_out/venn.png',dpi=300,bbox_inches = 'tight')
 
 def main():
     import sys
