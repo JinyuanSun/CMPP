@@ -1,13 +1,13 @@
 # CMPP
 **Annotate C(CAZy)M(MEROPS)P(PHI)P(P450) for fungi.**  
-Dependency: ncbi-blast (v2.9 or higher), hmmscan, venn and [functional](http://wulab.cf/CMPP/funcational.tar.gz)  
+Dependency: ncbi-blast (v2.9 or higher), hmmscan, venn and [functional](http://185.201.226.155/CMPP/functional.tar.gz)  
 blastp need to support v5 database, hmmscan is part of HMMER and install venn using pip.  
 ## Install
 Clone repo to local and download functional database.  
 ```bash
 git clone https://github.com/JinyuanSun/CMPP.git
 cd CMPP
-wget http://wulab.cf/CMPP/funcational.tar.gz
+wget http://185.201.226.155/CMPP/functional.tar.gz
 tar vczf functional.tar.gz
 ```
 ## Run CMPP pipeline
