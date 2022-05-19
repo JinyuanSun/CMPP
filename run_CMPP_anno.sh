@@ -1,6 +1,6 @@
 #!/bin/bash
-#run_CMPP_anno.sh -i $your_proteins.fasta -d $/path/to/functional/
-#A script to run blastp and hmmscan to annotate C(CAZy)M(MEROPS)P(PHI)P(P450) for fungi.
+# run_CMPP_anno.sh -i $your_proteins.fasta -d $/path/to/functional/
+# A script to run blastp and hmmscan to annotate C(CAZy)M(MEROPS)P(PHI)P(P450) for fungi.
 
 while getopts i:d: flag
 do
