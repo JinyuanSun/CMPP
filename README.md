@@ -8,7 +8,7 @@ Clone repo to local and download functional database.
 git clone https://github.com/JinyuanSun/CMPP.git
 cd CMPP
 wget http://185.201.226.155/CMPP/functional.tar.gz
-tar vczf functional.tar.gz
+tar vxzf functional.tar.gz
 ```
 ## Run CMPP pipeline
 ```bash
