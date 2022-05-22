@@ -16,6 +16,10 @@ tar vxzf functional.tar.gz
 ```
 Check the output in `CMPP_out`.
 
+## A web app for biologists [link](http://103.79.79.101:8070/)
+Simple cilck the start a new job button and upload a fasta file.
+![img](WebApp.png)
+
 ## It also available via [CoLab](https://colab.research.google.com/github/JinyuanSun/CMPP/blob/main/ColabCMPP.ipynb).  
 In this CoLab notebook, you can upload a custom fasta file conatining a proteome or directly download a proteome from NCBI.  
 

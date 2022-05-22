@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import distutils
 
+
 def make_autopct(values):
     def my_autopct(pct):
         total = sum(values)
@@ -11,7 +12,7 @@ def make_autopct(values):
         return '{v:d}'.format(p=pct,v=val)
     return my_autopct
 
-def cazy_plot(cazy_dict, short_cazy_names = True, size = 0.3, dark = False):
+def cazy_plot(cazy_dict, path='CMPP_out/',short_cazy_names = True, size = 0.3, dark = False):
     cazy_values = cazy_dict.values()
     cazy_names = cazy_dict.keys()
     #Uncomment the next line and change to any colors you like to use!
@@ -49,8 +50,8 @@ def cazy_plot(cazy_dict, short_cazy_names = True, size = 0.3, dark = False):
           wedgeprops=dict(width=size, edgecolor='w'))   
   
     ax.set(aspect="equal", title='CAZy annotation')
-    plt.show()
-    fig.savefig('CMPP_out/cazy_pie.png',dpi=300,bbox_inches = 'tight')
+    # plt.show()
+    fig.savefig(f'{path}/cazy_pie.png',dpi=300,bbox_inches = 'tight')
 
 def mk_cazy_dict(htbfile = './protein.faa.cazy.htb'):
     cazy_dict = {"GH":0,"GT":0,"PL":0,"CE":0,"AA":0,"CBM":0}
@@ -99,7 +100,7 @@ def mk_cazy_dict(htbfile = './protein.faa.cazy.htb'):
 
     return occured_cazy
 
-def merops_plot(merops_dict, short_merops_names = True, size = 0.3, dark = False):
+def merops_plot(merops_dict, path = 'CMPP_out/', short_merops_names = True, size = 0.3, dark = False):
     #Aspartic (A), Cysteine (C), Glutamic (G), Metallo (M), Asparagine (N), Mixed (P), Serine (S), Threonine (T), Unknown (U)
     merops_values = merops_dict.values()
     merops_names = merops_dict.keys()
@@ -142,8 +143,8 @@ def merops_plot(merops_dict, short_merops_names = True, size = 0.3, dark = False
           wedgeprops=dict(width=size, edgecolor='w'))   
   
     ax.set(aspect="equal", title='merops annotation')
-    plt.show()
-    fig.savefig('CMPP_out/merops_pie.png',dpi=300,bbox_inches = 'tight')
+    # plt.show()
+    fig.savefig(f'{path}/merops_pie.png',dpi=300,bbox_inches = 'tight')
 
 def read_merops_map(merops_path = "./merops.txt"):
     merops_map_dict = {}
@@ -199,7 +200,7 @@ def mk_merops_dict(merops_map_dict, btbfile = './protein.faa.merops.btb'):
 
     return occured_merops
 
-def phi_plot(phi_dict, short_phi_names = True,  dark = False):
+def phi_plot(phi_dict, path='CMPP_out/', short_phi_names = True,  dark = False):
     #chemistry_target:_resistance_to_chemical, chemistry_target:_sensitivity_to_chemical,
     #effector_(plant_avirulence_determinant), enhanced_antagonism, lethal
     # reduced_virulence, increased_virulence_(hypervirulence),
@@ -278,8 +279,8 @@ def phi_plot(phi_dict, short_phi_names = True,  dark = False):
     autolabel(rects1)
 
     #plt.set(aspect="equal", title='PHI annotation')
-    plt.show()
-    fig.savefig('CMPP_out/phi_bar.png',dpi=300,bbox_inches = 'tight')
+    # plt.show()
+    fig.savefig(f'{path}/phi_bar.png',dpi=300,bbox_inches = 'tight')
 
 def make_phi_dict(btbfile = 'protein.faa.phi.btb'):
     phi_dict =  {"RC":0,
@@ -340,48 +341,12 @@ def read_glist(path = './'):
             continue
     return dataset_dict
 
-def venn_plot(dataset_dict):
+def venn_plot(dataset_dict, path='CMPP_out/'):
     from venn import venn
 
     fig = venn(dataset_dict,cmap = plt.get_cmap("RdYlBu"))
-    plt.show()
-    fig.figure.savefig('CMPP_out/venn.png',dpi=300,bbox_inches = 'tight')
+    fig.figure.savefig(f'{path}/venn.png',dpi=300,bbox_inches = 'tight')
 
-class CMPP():
-    def __init__(self, input_file:str, database_path:str, output_path:str = 'CMPP_out/') -> None:
-        self.output_path = output_path
-        self.input_file = input_file.split("/")[-1]
-        self.database_path = database_path
-        self.fixed_blast_param = '-evalue 1e-10 -outfmt 6 -max_target_seqs 5 -num_threads 4 -out'
-        
-    def run_search(self):
-        # TODO: parsing file with python code.
-        os.system(f"blastp -query {self.input_file} -db {self.database_path}/merops/merops_scan.lib {self.fixed_blast_param} {self.input_file}.merops.btb")
-        os.system(f"blastp -query {self.input_file} -db {self.database_path}/PHI/phi-base_current.fas {self.fixed_blast_param} {self.input_file}.phi.btb")
-        os.system(f"hmmscan -o P450.out --tblout {self.input_file}.p450.htb --noali --cpu 4 -E 1e-5 {self.database_path}/P450/P450.hmm.txt {self.input_file}")
-        os.system(f"hmmscan -o CAZy.out --tblout {self.input_file}.cazy.htb --noali --cpu 4 -E 1e-5 {self.database_path}/CAZy/dbCAN-HMMdb-V9.txt {self.input_file}")
-        os.system("grep -v \"#\" %s.p450.htb|awk -F \" \" '{print$3}'|sort|uniq > p450.glist"%self.input_file)
-        os.system("grep -v \"#\" %s.cazy.htb|awk -F \" \" '{print$3}'|sort|uniq > cazy.glist"%self.input_file)
-        os.system("awk '{print$1}' %s.merops.btb |sort|uniq > merops.glist"%self.input_file)
-        os.system("awk '{print$1}' %s.phi.btb |sort|uniq > phi.glist"%self.input_file)
-        distutils.dir_util.mkpath(self.output_path)
-        os.system(f"mv *glist {self.output_path}")
-        os.system(f"mv *htb {self.output_path}")
-        os.system(f"mv *btb {self.output_path}")
-    
-    def run_plot(self):
-        dataset_dict = read_glist(path=self.output_path)
-        venn_plot(dataset_dict)
-
-        phi_dict = make_phi_dict(btbfile = self.output_path+self.input_file+'.phi.btb')
-        phi_plot(phi_dict, short_phi_names = True,  dark = False)
-
-        merops_map_dict = read_merops_map(merops_path = "common/merops.txt")
-        merops_dict = mk_merops_dict(merops_map_dict, btbfile = self.output_path+self.input_file+'.merops.btb')
-        merops_plot(merops_dict, short_merops_names = False)
-
-        cazy_dict = mk_cazy_dict(htbfile = self.output_path+self.input_file+'.cazy.htb')
-        cazy_plot(cazy_dict, short_cazy_names=True)
 
 def main(fasta_name):
 
